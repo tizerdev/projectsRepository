@@ -1,0 +1,49 @@
+server:
+  port:8090
+#双数据源配置
+spring:
+  datasource:
+    mysql:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/test?zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&rewriteBatchedStatements=true&relaxAutoCommit=true&useSSL=false&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true
+      username: root
+      password: root
+      type: com.alibaba.druid.pool.DruidDataSource
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      # 连接等待超时时间
+      max-wait: 60000
+      # 间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      # 一个连接在池中最小生存时间，单位是毫秒
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      filters: stat
+      logSlowSql: true
+    #�ڶ�����Դ
+    oracle:
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+      url: jdbc:oracle:thin:@localhost:1521/orcl
+      username: sz01
+      password: sz01
+      type: com.alibaba.druid.pool.DruidDataSource
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      #���û�ȡ���ӵȴ���ʱ��ʱ��
+      max-wait: 60000
+      #���ü����òŽ���һ�μ�⣬���ʱ��Ҫ�رյĿ������ӣ���λ�Ǻ���
+      time-between-eviction-runs-millis: 60000
+      # ����һ�������ڳ�����С����ʱ�䣬��λ�Ǻ���
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      # ���ü��ͳ�����ص�filters��ȥ�����ؽ���sql�޷�ͳ�ƣ���wall�����ڷ���ǽ
+      filters: stat.wall
+      logSlowSql: true
